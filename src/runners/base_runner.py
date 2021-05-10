@@ -37,8 +37,8 @@ class BaseRunner(ABC):
         }[filter_type]
 
     def calculate_mean_and_std(self) -> (np.ndarray, np.ndarray):
-        mean = np.mean(self.scores)
-        std = np.std(self.scores)
+        mean = round(np.mean(self.scores), 3)
+        std = round(np.std(self.scores), 3)
 
         return mean, std
 
