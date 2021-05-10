@@ -16,6 +16,9 @@ from sklearn.ensemble import AdaBoostClassifier
 class BaseRunner(ABC):
 
     def __init__(self):
+        """
+        Init of runner. Now create synthetic data.
+        """
         super(BaseRunner, self).__init__()
         self.X, self.y = datasets.make_classification(**data_set_values)
 
@@ -26,9 +29,20 @@ class BaseRunner(ABC):
 
     @abstractmethod
     def run_classifier(self, filter_type: FilterTypes) -> (np.ndarray, np.ndarray):
+        """
+        Run classifier using filter_type to get mean and std
+        :param filter_type:
+        :return:
+        """
         pass
 
     def _filter_x(self, filter_type: FilterTypes, train):
+        """
+        Switch case for filtering x
+        :param filter_type:
+        :param train:
+        :return:
+        """
         return {
             FilterTypes.NoFilter: self.X,
             FilterTypes.PCA: PCAFilter().filter_x(self.X, train=train),
@@ -37,6 +51,10 @@ class BaseRunner(ABC):
         }[filter_type]
 
     def calculate_mean_and_std(self) -> (np.ndarray, np.ndarray):
+        """
+        Calculate mean and std using list of scores
+        :return: Returns means and std
+        """
         mean = round(np.mean(self.scores), 3)
         std = round(np.std(self.scores), 3)
 
