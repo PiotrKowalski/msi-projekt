@@ -1,6 +1,4 @@
-from abc import ABC
-
-from sklearn.decomposition import PCA
+from typing import Any
 from sklearn.feature_selection import SelectKBest, chi2
 from sklearn.preprocessing import MinMaxScaler
 
@@ -8,7 +6,7 @@ from src.filters.base_filter import BaseFilter
 
 
 class Chi2Filter(BaseFilter):
-    def filter_x(self, x, **kwargs):
+    def filter_x(self, x, **kwargs) -> Any:
         y = kwargs.get("y")
         minmaxscaler = MinMaxScaler()
         minmaxscaler.fit(x)

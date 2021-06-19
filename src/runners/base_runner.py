@@ -1,21 +1,15 @@
 from abc import ABC, abstractmethod
-from typing import Any
-
 import numpy as np
-from deslib.base import BaseDS
-from deslib.des import KNORAU
-from sklearn import datasets, clone
-from sklearn.metrics import accuracy_score
+from sklearn import datasets
 from sklearn.model_selection import StratifiedKFold
 from src.constants import *
 from src.filters.chi2 import Chi2Filter
 from src.filters.pca import PCAFilter
-from sklearn.ensemble import AdaBoostClassifier
 
 
 class BaseRunner(ABC):
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Init of runner. Now create synthetic data.
         """
@@ -36,7 +30,7 @@ class BaseRunner(ABC):
         """
         pass
 
-    def _filter_x(self, filter_type: FilterTypes, train):
+    def filter_x(self, filter_type: FilterTypes, train):
         """
         Switch case for filtering x
         :param filter_type:
@@ -55,7 +49,7 @@ class BaseRunner(ABC):
         Calculate mean and std using list of scores
         :return: Returns means and std
         """
-        mean = round(np.mean(self.scores), 3)
+        mean = round(np.mean(self.scores), 2)
         std = round(np.std(self.scores), 3)
 
         return mean, std

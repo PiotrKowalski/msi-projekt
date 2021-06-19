@@ -1,4 +1,4 @@
-from enum import Enum, IntEnum
+from enum import IntEnum
 
 RANDOM_STATE = 1
 N_SPLITS = 5

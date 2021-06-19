@@ -1,12 +1,14 @@
 import numpy as np
-from src.runners.helpers import run_kfold
+from deslib.des import DESKNN as des
 from src.runners.base_runner import BaseRunner
 from src.constants import *
-from sklearn.ensemble import AdaBoostClassifier
+from src.runners.helpers import run_kfold
+from src.classifiers.desknn import DESKNN
 
 
-class AdaBoostRunner(BaseRunner, AdaBoostClassifier):
+
+
+class DESKNNRunner(BaseRunner, des):
 
     def run_classifier(self, filter_type: FilterTypes) -> (np.ndarray, np.ndarray):
         return run_kfold(self, filter_type)
-
